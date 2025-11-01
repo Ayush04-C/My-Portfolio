@@ -214,8 +214,7 @@ export default function Carousel({
         drag={isMobile ? false : "x"}
         {...(isMobile ? {} : dragProps)}
         style={{
-          width: 'h-screen',
-          paddingLeft: `${containerPadding}px`,
+          width: 'max-content',
           gap: `${GAP}px`,
           perspective: isMobile ? 'none' : 1000,
           perspectiveOrigin: isMobile ? '50% 50%' : `${currentIndex * trackItemOffset + itemWidth / 2}px 50%`,
