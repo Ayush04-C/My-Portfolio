@@ -4,7 +4,6 @@ import SplitText from './components/hoverwords';
 import SpotlightCard from './components/SpotlightCard';
 import Link from 'next/link';
 import FadeContent from './components/FadeContent';
-
   
 const handleAnimationComplete = () => {
   // console.log('All letters have animated!');

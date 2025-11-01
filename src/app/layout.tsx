@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import FadeContent from "./components/FadeContent";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,6 +28,7 @@ export default function RootLayout({
           <FadeContent blur={true} duration={1000} easing="ease-out" initialOpacity={0}>
             {/* Anything placed inside this container will be fade into view */}
             {children}
+            <SpeedInsights />
           </FadeContent>
       </body>
     </html>
