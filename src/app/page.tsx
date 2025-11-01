@@ -1,65 +1,61 @@
-import Image from "next/image";
+'use client';
+
+import SplitText from './components/hoverwords';
+import SpotlightCard from './components/SpotlightCard';
+import Link from 'next/link';
+import FadeContent from './components/FadeContent';
+
+  
+const handleAnimationComplete = () => {
+  // console.log('All letters have animated!');
+};
 
 export default function Home() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+  return (  
+  <FadeContent blur={false} duration={1000} easing="ease-out" initialOpacity={0}>
+    <div className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden">
+      <div className="relative flex flex-col items-left justify-center text-black gap-2 p-6">
+        <div className="flex flex-row text-left justify-start gap">  
+          <Link href="/"><div className="w-10 h-10 rounded-full shadow flex items-center justify-center">1</div></Link>
+          <Link href="/aboutme"><div className="w-10 h-10 rounded-full shadow flex items-center justify-center">2</div></Link>
+          <Link href="/projects"><div className="w-10 h-10 rounded-full shadow flex items-center justify-center">3</div></Link>
+          <Link href="/ContactMe"><div className="w-10 h-10 rounded-full shadow flex items-center justify-center">4</div></Link>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className='text-center w-150'>
+          <SpotlightCard className="custom-spotlight-card" spotlightColor="rgba(0, 229, 255, 0.2)">
+                  <SplitText
+                    text="Hello, Visitor!"
+                    className="text-2xl font-semibold mb-4"
+                    delay={100}
+                    duration={0.6}
+                    ease="power3.out"
+                    splitType="chars"
+                    from={{ opacity: 0, y: 40 }}
+                    to={{ opacity: 1, y: 0 }}
+                    threshold={0.1}
+                    rootMargin="-100px"
+                    onLetterAnimationComplete={handleAnimationComplete}
+                    />
+                  <h1 className="text-base leading-relaxed">
+                    <p className='text-left text-2xl mb-3'>Hi, I’m <span className="font-semibold">Ayush</span></p>
+                    <p className='text-gray-500 text-left mb-2' style={{fontWeight:'600', fontSize:'0.9rem'}}> Full Stack Dev </p>
+                    <hr />
+                    <div className='text-gray-500 text-left mt-2' style={{fontSize:'0.8rem', textAlign:'left', color:'gray'}}>
+                      <p>I build smart contracts, usually busy playing bugs occasionally touching grass.</p>
+                      <p className='text-black mt-2 mb-2' style={{fontSize:'1.2rem', fontWeight:'700'}}> What Can I Do </p>
+                      <ul className="list-disc pl-5 space-y-2">
+                        <li>Built and deployed responsive web applications using reactjs and Tailwind CSS</li>
+                        <li>Architectured a fully functional Decentralized Application on Web3 and integrated real time payment to blockchain in the medical field</li>
+                        <li>Orchestrated a Sorting AI, categorizing huge chunks of data efficiently in multiple groups helps in academic growth of students</li>
+                        <li>Created a full-stack Timetable for users to see their timetable according to the fetched data of user using REST-API, serving more than 10,000 users</li>
+                        <li>Created a smart contract using Solidity and tested it using Hardhat, and built the frontend with React.js for the marketplace where users can buy and sell digital assets using ETH</li>
+                      </ul>
+                    </div>
+                  </h1>
+          </SpotlightCard>
         </div>
-      </main>
+      </div>
     </div>
+  </FadeContent>
   );
 }
