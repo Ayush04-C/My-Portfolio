@@ -87,8 +87,37 @@ export default function Carousel({
   loop = false,
   round = false
 }: CarouselProps): JSX.Element {
+  // Mobile detection (affects layout only, not desktop)
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const update = () => setIsMobile(window.innerWidth <= 768);
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
   const containerPadding = 16;
-  const itemWidth = baseWidth - containerPadding * 2;
+  // Measure container to compute full-width cards on mobile
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState<number | null>(null);
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const el = containerRef.current;
+    const ro = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const cw = entry.contentRect.width;
+        setContainerWidth(cw);
+      }
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const computedItemWidth = isMobile && containerWidth
+    ? Math.max(220, containerWidth - containerPadding * 3)
+    : baseWidth - containerPadding * 2;
+
+  const itemWidth = computedItemWidth;
   const trackItemOffset = itemWidth + GAP;
 
   const carouselItems = loop ? [...items, items[0]] : items;
@@ -96,8 +125,8 @@ export default function Carousel({
   const x = useMotionValue(0);
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [isResetting, setIsResetting] = useState<boolean>(false);
-
-  const containerRef = useRef<HTMLDivElement>(null);
+  // track drag start globally (avoid hook-in-loop)
+  const [dragStartX, setDragStartX] = useState(0);
   useEffect(() => {
     if (pauseOnHover && containerRef.current) {
       const container = containerRef.current;
@@ -175,36 +204,38 @@ export default function Carousel({
       }`}
       style={{
         marginBottom: '50px',
-        width: `${baseWidth}px`,
+        width: isMobile ? '100%' : `${baseWidth}px`,
+        maxWidth: isMobile ? '100%' : `${baseWidth}px`,
         ...(round && { height: `${500}px` })
       }}
     >
       <motion.div
         className="flex"
-        drag="x"
-        {...dragProps}
+        drag={isMobile ? false : "x"}
+        {...(isMobile ? {} : dragProps)}
         style={{
-          width: itemWidth,
+          width: 'h-screen',
+          paddingLeft: `${containerPadding}px`,
           gap: `${GAP}px`,
-          perspective: 1000,
-          perspectiveOrigin: `${currentIndex * trackItemOffset + itemWidth / 2}px 50%`,
-          x
+          perspective: isMobile ? 'none' : 1000,
+          perspectiveOrigin: isMobile ? '50% 50%' : `${currentIndex * trackItemOffset + itemWidth / 2}px 50%`,
+          x,
+          ...(isMobile && { marginLeft: '8px' })
         }}
-        onDragEnd={handleDragEnd}
+        onDragEnd={isMobile ? undefined : handleDragEnd}
         animate={{ x: -(currentIndex * trackItemOffset) }}
         transition={effectiveTransition}
         onAnimationComplete={handleAnimationComplete}
       >
         {carouselItems.map((item, index) => {
           const range = [-(index + 1) * trackItemOffset, -index * trackItemOffset, -(index - 1) * trackItemOffset];
-          const outputRange = [90, 0, -90];
-          const rotateY = useTransform(x, range, outputRange, { clamp: false });
-          
-          const [dragStartX, setDragStartX] = useState(0);
+          // Always call the same hook; flatten rotation on mobile by mapping to 0
+          const rotateY = useTransform(x, range, isMobile ? [0, 0, 0] : [90, 0, -90], { clamp: false });
 
-          const handleCardClick = (e: React.MouseEvent) => {
+          const handleCardClick = (e: React.MouseEvent | React.TouchEvent) => {
             // Only navigate if user didn't drag (prevent navigation on drag)
-            const dragDistance = Math.abs(e.clientX - dragStartX);
+            const clientX = 'clientX' in e ? e.clientX : e.changedTouches[0].clientX;
+            const dragDistance = Math.abs(clientX - dragStartX);
             if (dragDistance < 10 && item.link) {
               window.open(item.link, '_blank', 'noopener,noreferrer');
             }
@@ -217,7 +248,7 @@ export default function Carousel({
                 round
                   ? 'items-center justify-center text-center bg-[#060010] border-0'
                   : 'items-start justify-center border border-[#222] rounded-[12px]'
-              } overflow-hidden ${item.link ? 'cursor-pointer' : 'cursor-grab'} active:cursor-grabbing`}
+              } overflow-hidden ${item.link ? 'cursor-pointer' : isMobile ? '' : 'cursor-grab'} ${isMobile ? '' : 'active:cursor-grabbing'}`}
               style={{
                 width: itemWidth,
                 rotateY: rotateY,
@@ -230,6 +261,7 @@ export default function Carousel({
               }}
               transition={effectiveTransition as any}
               onMouseDown={(e) => setDragStartX(e.clientX)}
+              onTouchStart={(e) => setDragStartX(e.touches[0].clientX)}
               onClick={handleCardClick}
             >
               {/* Optional overlay for better text readability */}

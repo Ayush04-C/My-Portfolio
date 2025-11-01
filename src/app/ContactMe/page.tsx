@@ -69,7 +69,7 @@ const AboutMe = () => {
                   <h1 className="text-base leading-relaxed">
                     <p className='text-left text-1xmd mb-1'><span className="text-gray-500">Don't be shy</span></p>
                     <hr />
-                    <p className='text-gray-500 text-left mt-2' style={{fontWeight:'600', fontSize:'0.9rem'}}>Let us connect and discuss our next steps.</p>
+                    <p className='text-gray-500 text-left mt-2' style={{fontWeight:'600', fontSize:'0.9rem'}}>Let us connect and discuss our next projects.</p>
                     <form ref={formRef} onSubmit={handleSubmit} className='text-gray-500 text-left mt-2' style={{fontSize:'0.8rem', textAlign:'left', color:'gray'}}>
                         <div className='bg-gray-100 border border-gray-300 rounded-[25px] p-3'>
                             <span className='font-semibold text-black'>Name</span>
