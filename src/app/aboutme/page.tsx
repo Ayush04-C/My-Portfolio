@@ -16,10 +16,10 @@ const AboutMe = () => {
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="relative flex flex-col items-left justify-center text-black gap-2 p-6">
         <div className="flex flex-row text-left justify-start gap">  
-          <Link href="/"><div className="w-10 h-10 rounded-full shadow flex items-center justify-center">1</div></Link>
-          <Link href="/aboutme"><div className="w-10 h-10 rounded-full shadow flex items-center justify-center">2</div></Link>
-          <Link href="/projects"><div className="w-10 h-10 rounded-full shadow flex items-center justify-center">3</div></Link>
-          <Link href="/ContactMe"><div className="w-10 h-10 rounded-full shadow flex items-center justify-center">4</div></Link>
+          <Link href="/"><div className="w-10 h-10 flex shadow items-center justify-center rounded-full bg-white text-black font-semibold transition-all duration-500 ease-in-out hover:rotate-[360deg] hover:scale-110 hover:bg-black hover:text-white">1</div></Link>
+          <Link href="/aboutme"><div className="w-10 h-10 flex shadow items-center justify-center rounded-full bg-white text-black font-semibold transition-all duration-500 ease-in-out hover:rotate-[360deg] hover:scale-110 hover:bg-black hover:text-white">2</div></Link>
+          <Link href="/projects"><div className="w-10 h-10 flex shadow items-center justify-center rounded-full bg-white text-black font-semibold transition-all duration-500 ease-in-out hover:rotate-[360deg] hover:scale-110 hover:bg-black hover:text-white">3</div></Link>
+          <Link href="/ContactMe"><div className="w-10 h-10 flex shadow items-center justify-center rounded-full bg-white text-black font-semibold transition-all duration-500 ease-in-out hover:rotate-[360deg] hover:scale-110 hover:bg-black hover:text-white">4</div></Link>
         </div>
         <div className='text-center w-150'>
           <SpotlightCard className="custom-spotlight-card" spotlightColor="rgba(0, 229, 255, 0.2)">
