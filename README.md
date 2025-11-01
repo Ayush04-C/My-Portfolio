@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Personal Portfolio Website
 
-## Getting Started
+A modern, responsive portfolio website built with Next.js 16, TypeScript, and Tailwind CSS. This portfolio showcases projects, skills, and contact information with smooth animations and transitions.
 
-First, run the development server:
+## 🌟 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Modern Tech Stack**: Built with Next.js 16, TypeScript, and Tailwind CSS
+- **Responsive Design**: Works seamlessly across all device sizes
+- **Smooth Animations**: Interactive elements with GSAP-powered animations
+- **Dynamic Components**: Carousel for project showcase, spotlight cards, and fade transitions
+- **Contact Form**: EmailJS integration for direct messaging
+- **Dark Mode Support**: Automatic theme switching based on system preferences
+
+## 🚀 Technologies Used
+
+- **Framework**: [Next.js 16](https://nextjs.org/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animations**: [GSAP](https://greensock.com/gsap/)
+- **UI Components**: Custom-built with React
+- **Email Service**: [EmailJS](https://www.emailjs.com/)
+
+## 📁 Project Structure
+
+```
+portfolio/
+├── src/
+│   ├── app/
+│   │   ├── components/     # Reusable UI components
+│   │   ├── aboutme/        # About Me page
+│   │   ├── projects/       # Projects showcase page
+│   │   ├── ContactMe/      # Contact form page
+│   │   ├── page.tsx        # Home page
+│   │   ├── layout.tsx      # Root layout
+│   │   └── globals.css     # Global styles
+│   └── lib/
+│       └── utils.ts        # Utility functions
+├── public/                 # Static assets
+├── next.config.ts          # Next.js configuration
+├── tailwind.config.ts      # Tailwind CSS configuration
+└── package.json            # Project dependencies
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎨 Key Components
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **SpotlightCard**: Interactive card with spotlight effect on hover
+2. **SplitText**: Text animation component for engaging headings
+3. **FadeContent**: Smooth fade-in transitions between pages
+4. **Carousel**: Project showcase carousel with autoplay
+5. **RouteTransition**: Smooth page transitions
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📱 Pages
 
-## Learn More
+- **Home**: Introduction and overview of skills
+- **About Me**: Personal information, education, and interests
+- **Projects**: Interactive carousel showcasing projects
+- **Contact Me**: Contact form with multiple contact options
 
-To learn more about Next.js, take a look at the following resources:
+## 📞 Contact
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+For any inquiries, you can reach out through:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Email: ayushchhatre29@gmail.com
+- GitHub: [github.com/Ayush04-C](https://github.com/Ayush04-C)
+- LinkedIn: [/in/ayush-santosh-chhatre](https://www.linkedin.com/in/ayush-santosh-chhatre-7a68b4336/)
 
-## Deploy on Vercel
+## 📄 License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is proprietary and confidential. All rights reserved.
